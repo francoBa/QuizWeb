@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class QuesModel(models.Model):
-    id_pk = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=30, null=True)
     question = models.CharField(max_length=200,null=True)
     op1 = models.CharField(max_length=200,null=True)
