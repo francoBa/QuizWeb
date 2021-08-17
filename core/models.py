@@ -12,4 +12,4 @@ class QuesModel(models.Model):
     
     def __str__(self):
         ques_display = f"ID: {self.id} | Category: {self.category} | Question: {self.question}"
-        return self.question
+        return ques_display
