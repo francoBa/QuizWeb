@@ -11,5 +11,5 @@ class QuesModel(models.Model):
     ans = models.CharField(max_length=200,null=True)
     
     def __str__(self):
-        ques_display = f"ID: {self.id_pk} | Category: {self.category} | Question: {self.question}"
+        ques_display = f"ID: {self.id} | Category: {self.category} | Question: {self.question}"
         return self.question
