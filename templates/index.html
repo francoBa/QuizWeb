@@ -30,7 +30,11 @@
   <nav class="menu">
     {% if request.user.is_authenticated %}
     <p style="color: white;">usuario: {{request.user.username }}</p>
+    {% if request.user.is_staff %}
+    <a href="/admin/core/quesmodel/add">Agregar Preguntas</a>
+    {% else %}
     <p style="color: white;">puntaje: {{request.user.puntaje }}</p>
+    {% endif %}
     <a href="{% url 'cerrar_sesion' %}">Cerrar sesion</a>
     {% else %}
     <a href="{% url 'iniciar_sesion' %}">Iniciar sesion</a>
@@ -40,7 +44,14 @@
 </aside>
 
 <main class="main">
-  <section class="intro"></section>
+  <!-- <section class="intro"></section> -->
+  <section class="section">
+    {% if request.user.is_authenticated %}
+    {% if not request.user.is_staff %}
+    <a href="{% url 'jugar' %}">Jugar</a>
+    {% endif %}
+    {% endif %}
+  </section>
 </main>
 
 <button class="scroll-top-btn hidden">&#11014;</button>

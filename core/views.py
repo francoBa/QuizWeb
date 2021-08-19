@@ -15,4 +15,4 @@ def jugar(request):
     validar correcta en valor de respuesta
     acumular puntaje
   '''
-  pass
+  return render(request, 'jugar.html')
