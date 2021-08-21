@@ -1,20 +1,28 @@
-<!DOCTYPE html>
-<html lang="es-AR">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iniciar sesion</title>
-</head>
+{% block contenido %}
 
-<body>
-  <h1>Iniciar Sesion</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="hidden" name="next" value="{{next}}">
-    <input type="submit" value="Iniciar">
-  </form>
-</body>
+<form class="mt-5 form-signin text-center" method="POST">
+  {% csrf_token %}
 
-</html>
+  {% load static %}
+  <img class="mb-4" width="72" height="57" role="img" src="{% static 'images/quiz.svg' %}" alt="logo">
+  <h1 class="h3 mb-3 fw-normal">Iniciar Sesion</h1>
+  <div class="form-floating">
+    {{form.username}}
+  </div>
+  <div class="form-floating">
+    {{form.password}}
+  </div>
+
+  {% if form.errors %}
+  <div class="text-center text-red">
+    Usuario o Contraseña Incorrectos
+  </div>
+  {% endif %}
+  <button class="btn btn-lg btn-primary" type="submit">Iniciar</button>
+  <p class="mt-5 mb-3 text-muted"><a class="text-decoration-none text-blue"
+      href="{% url 'crear_usuario' %}">registrarse</a></p>
+</form>
+
+{% endblock %}
