@@ -2,8 +2,17 @@ from django.shortcuts import render
 import random
 
 # Create your views here.
+# def inicio(request):
+#   return render(request, 'index.html')
+
+
 def inicio(request):
-  return render(request, 'index.html')
+  # if request.user.is_authenticated: #and request.user.is_staff:
+  #   template = "admin_dashboard.html"
+  # else:
+  template = "index.html"
+  contexto = {}
+  return render(request, template, contexto)
 
 
 def jugar(request):
@@ -15,4 +24,4 @@ def jugar(request):
     validar correcta en valor de respuesta
     acumular puntaje
   '''
-  return render(request, 'jugar.html')
+  return render(request, 'play.html')
