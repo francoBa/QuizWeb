@@ -35,7 +35,7 @@ urlpatterns = [
 
   #cambiar contraseña
   path(
-    "password/",
+      "cambiar_pass/",
     auth_user_views.PasswordChangeView.as_view(
       template_name="cuenta/cambiar_pass.html"
     ),
