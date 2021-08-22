@@ -1,15 +1,42 @@
-<!DOCTYPE html>
-<html lang="es-AR">
+{% extends 'base.html' %}
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página - Jugar</title>
+  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Bungee|Sirin+Stencil:400,600&display=swap"
+    rel="stylesheet">
 </head>
 
-<body>
-  <h1>Jugar</h1>
-  <a href="{% url 'inicio' %}">volver</a>
-</body>
+{% block contenido %}
 
-</html>
+<h1>Jugar</h1>
+<section class="section-1" id="section-1">
+  <main>
+    <div class="text-container">
+      <h3>Arte y cultura</h3>
+      <p>Pregunta 1 de 5</p>
+      <p>Que Acontecimiento Cultural Importante Se Realiza?</p>
+    </div>
+    <form class="mt-2 form-signin text-center" method="POST">
+      <div class="quiz-options">
+        <input type="radio" class="input-radio one-a jshdgdgwgdwfdfwdwjfdjwwdwdco" id="one-a" name="yes-1" required>
+        <label class="radio-label jsjwjdwjdwjdwco" for="one-a">
+          <span class="alphabet">A</span> La Bienal Internacional de Escultura <img class="icon jdsjkefkefkefefexco"
+            src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588518387/jdsjkefkefkefefexco.svg" alt="">
+        </label>
+        <input type="radio" class="input-radio one-b jshdgdgwgdwfdfwdwjfdjwwdwdin" id="one-b" name="yes-1">
+        <label class="radio-label jsjwjdwjdwjdwin" for="one-b">
+          <span class="alphabet">B</span> Festival Del Chicharron <img class="icon jfdedgwfzexf4hjin"
+            src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg">
+        </label>
+        <input type="radio" class="input-radio one-c jshdgdgwgdwfdfwdwjfdjwwdwdin" id="one-c" name="yes-1">
+        <label class="radio-label jsjwjdwjdwjdwin" for="one-c">
+          <span class="alphabet">C</span> Festival Nacional Del Algodon <img class="icon jfdedgwfzexf4hjin"
+            src="https://res.cloudinary.com/dvhndpbun/image/upload/v1588517753/jfdedgwfzexf4hjin.svg">
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary" type="submit">Enviar</button>
+      <a class="text-muted text-decoration-none text-blue" href="{% url 'inicio' %}"> | salir </a>
+    </form>
+  </main>
+</section>
+
+{% endblock %}
