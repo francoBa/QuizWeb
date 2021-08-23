@@ -66,8 +66,9 @@ def jugar(request):
   elif  request.method == 'POST':
     
     
-    if numeroPregunta>=5:
-      return render(request,'index2.html')
+    if numeroPregunta>5:
+      # return render(request,'index2.html')
+      return redirect("index2")
     else:
       #print(request.POST)
       questions = QuesModel.objects.get(pk=int(request.POST.get("ID")))
