@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 <head>
   <link href="https://fonts.googleapis.com/css?family=Comfortaa|Bungee|Sirin+Stencil:400,600&display=swap"
     rel="stylesheet">
@@ -16,6 +18,7 @@
       <p>Que Acontecimiento Cultural Importante Se Realiza?</p>
     </div>
     <form class="mt-2 form-signin text-center" method="POST">
+      {% csrf_token %}
       <div class="quiz-options">
         <input type="radio" class="input-radio one-a jshdgdgwgdwfdfwdwjfdjwwdwdco" id="one-a" name="yes-1" required>
         <label class="radio-label jsjwjdwjdwjdwco" for="one-a">

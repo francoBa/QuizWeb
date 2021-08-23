@@ -1,12 +1,13 @@
 from django import forms
 from django.shortcuts import redirect, render, resolve_url
-#from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import EditarPerfilForm, NuevoPerfilForm, CambiarPassword
+from .models import Perfil
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.password_validation import password_changed
 from django.contrib.auth.hashers import make_password, check_password
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def crear_usuario(request):
@@ -62,24 +63,19 @@ def cerrar_sesion(request):
   return redirect("inicio")
 
 
-def pass_cambiada(request):
-  if not request.user.is_authenticated:
-    return redirect("iniciar_sesion")
 
-  if request.method == "POST":
+@login_required
+def pass_cambiada(request):
+  form = CambiarPassword(request.user)
+
+  if request.method == 'POST':
     form = CambiarPassword(request.user, request.POST)
     if form.is_valid():
-      check_password(form.cleaned_data["old_password"], encoded=request.user.password)
-      make_password(form.cleaned_data["new_password1"], salt=None, hasher='default')
-      user = form.save()
+      user = Perfil.objects.get(username=form.user.cleaned_data["username"])
+      password = form.cleaned_data["new_password1"]
+      form.user.set_password(password)
+      form.save()
       update_session_auth_hash(request, user)
-      messages.success(request, 'Tu contraseña fue cambiada!')
-      # return redirect('change_password')
-      return redirect("inicio")
-    else:
-      messages.error(request, 'Por favor corriga el error e intente nuevamente.')
-  else:
-    form = CambiarPassword(request.user)
-  
+
   contexto = {"form": form}
   return render(request, "cuenta/cambiar_pass.html", contexto)
