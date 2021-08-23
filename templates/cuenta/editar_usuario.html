@@ -44,7 +44,7 @@
   {% endif %}
 
   <button class="btn btn-lg btn-primary" type="submit">Aceptar</button>
-  <!-- <a class="text-muted text-decoration-none text-blue" href="{#% url 'change_password' %}">cambiar contraseña</a> -->
+  <a class="text-muted text-decoration-none text-blue" href="{% url 'change_password' %}">cambiar contraseña</a>
   <span> | </span>
   <a class="text-muted text-decoration-none text-blue" href="{% url 'inicio' %}">cancelar</a>
 </form>

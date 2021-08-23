@@ -3,6 +3,16 @@ from . import views
 from django.contrib.auth import views as auth_user_views
 
 urlpatterns = [
+  #vista de registrarse
+  path(
+    "formulario/",
+    views.formulario,
+    name="formulario"
+  ),
+  #vista de iniciar sesion
+
+  path("inicio_de_sesion/", views.inicio_de_sesion, name="inicio_de_sesion"),
+  
   #login
   path(
     "iniciar_sesion/",

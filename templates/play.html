@@ -1,15 +1,60 @@
-<!DOCTYPE html>
-<html lang="es-AR">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página - Jugar</title>
-</head>
+{% block contenido %}
 
-<body>
-  <h1>Jugar</h1>
-  <a href="{% url 'inicio' %}">volver</a>
-</body>
+<h1 class="py-1 text-center">Jugar</h1>
+<section class="section-1" id="section-1">
+  <div class="text-container">
+    <h3>{{form.category}}</h3>
+    <p>Pregunta {{numeroPregunta}} de 5</p>
+    <p>{{form.question}}</p>
+  </div>
+  <form class="mt-2 form-signin text-center" method="POST" action="">
+    {% csrf_token %}
+    <input type="hidden" name="numeroPregunta" value="{{numeroPregunta}}">
+    <input type="hidden" id="opcionMarcada" name="opcionMarcada" value="">
+    <input type="hidden" name="op1" value="{{form.op1}}">
+    <input type="hidden" name="op2" value="{{form.op2}}">
+    <input type="hidden" name="op3" value="{{form.op3}}">
+    <input type="hidden" name="ID" value="{{form.id}}">
+    <input type="hidden" name="score" value="{{score}}">
+    <input type="hidden" name="wrong" value="{{wrong}}">
+    <input type="hidden" name="correct" value="{{correct}}">
+    <div class="quiz-options">
+      <label class="radio-label jsjwjdwjdwjdwco" for="one-a">
+        <input type="radio" class="input-radio one-a jshdgdgwgdwfdfwdwjfdjwwdwdco" id="one-a" name="{{form.op1}}">
+        <span class="alphabet">A</span>{{form.op1}}
+      </label>
+      <label class="radio-label jsjwjdwjdwjdwin" for="one-b">
+        <input type="radio" class="input-radio one-b jshdgdgwgdwfdfwdwjfdjwwdwdin" id="one-b" name="{{form.op1}}">
+        <span class="alphabet">B</span> {{form.op2}}
+      </label>
+      <label class="radio-label jsjwjdwjdwjdwin" for="one-c">
+        <input type="radio" class="input-radio one-c jshdgdgwgdwfdfwdwjfdjwwdwdin" id="one-c" name="{{form.op1}}">
+        <span class="alphabet">C</span>{{form.op3}}
+      </label>
+    </div>
+    <button class="btn btn-lg btn-primary" type="submit" onclick="respuesta();">Enviar</button>
+    <a class="text-muted text-decoration-none text-blue" href="{% url 'index2' %}"> | salir </a>
+  </form>
+</section>
+<script>
+  function respuesta(e) {
+    const preg1 = document.getElementById("one-a").value;
+    const preg2 = document.getElementById("one-b").value;
+    const preg3 = document.getElementById("one-c").value;
+    const input = document.getElementById("opcionMarcada");
 
-</html>
+    if (preg1 === "on") {
+      input.value = "op1";
+    }
+    else if (preg2 === "on") {
+      input.value = "op2";
+    }
+    else {
+      input.value = "op3";
+    }
+
+  }
+</script>
+{% endblock %}
