@@ -10,6 +10,26 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+#parte del front
+def inicio_de_sesion(request):
+  # if request.user.is_authenticated: #and request.user.is_staff:
+  #   template = "admin_dashboard.html"
+  # else:
+  template = "inicio_de_sesion.html"
+  contexto = {}
+  return render(request, template, contexto)
+
+def formulario(request):
+  # if request.user.is_authenticated: #and request.user.is_staff:
+  #   template = "admin_dashboard.html"
+  # else:
+  template = "formulario.html"
+  contexto = {}
+  return render(request, template, contexto)
+
+#hasta aca es front
+
+
 def crear_usuario(request):
   if request.user.is_authenticated:
     return redirect("inicio")

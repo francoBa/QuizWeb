@@ -1,21 +1,5 @@
-{% extends 'base.html' %}
-{%load static%}
-
-<head>
-  <link href="https://fonts.googleapis.com/css?family=Comfortaa|Bungee|Sirin+Stencil:400,600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="../static/css/play.css">
-</head>
-
-{% block contenido %}
-
-
-
-
-<!--<style>
-  html {
+html {
     box-sizing: border-box;
-    overflow-y: auto;
 }
 
 *,
@@ -26,6 +10,7 @@
 
 html,
 body {
+    overflow: hidden;
     position: relative;
     height: 100%;
 }
@@ -146,9 +131,8 @@ label .jdsjkefkefkefefexco {
 .one-a:valid+label,
 .two-c:valid+label,
 .three-c:valid+label,
-.four-b:valid+label,
-.five-a:valid+label {
-    animation: flash 0.6s infinite;
+ {
+    animation: flash 0.6s ;
 }
 
 @keyframes flash {
@@ -446,84 +430,3 @@ h1::before {
     }
 
 }
-
-</style>-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1>Jugar</h1>
-<section class="section-1" id="section-1">
-  <main>
-    <div class="text-container">
-      <h3>{{form.category}}</h3>
-      <p>Pregunta {{numeroPregunta}} de 5</p>
-      <p>{{form.question}}</p>
-    </div>
-    <form class="mt-2 form-signin text-center" method="POST" action="">
-      {% csrf_token %}
-      <input type="hidden" name="numeroPregunta" value="{{numeroPregunta}}">
-      <input type="hidden" id="opcionMarcada" name="opcionMarcada" value="">
-      <input type="hidden" name="op1" value="{{form.op1}}">
-      <input type="hidden" name="op2" value="{{form.op2}}">
-      <input type="hidden" name="op3" value="{{form.op3}}">
-      <input type="hidden" name="ID" value="{{form.id}}">
-      <input type="hidden" name="score" value="{{score}}">
-      <input type="hidden" name="wrong" value="{{wrong}}">
-      <input type="hidden" name="correct" value="{{correct}}">
-      <div class="quiz-options">
-
-        <input type="radio" class="input-radio one-a jshdgdgwgdwfdfwdwjfdjwwdwdco" id="one-a" name="{{form.op1}}">
-        <label class="radio-label jsjwjdwjdwjdwco" for="one-a">
-          <span class="alphabet">A</span>{{form.op1}}
-        </label>
-        <input type="radio" class="input-radio one-b jshdgdgwgdwfdfwdwjfdjwwdwdin" id="one-b" name="{{form.op1}}">
-        <label class="radio-label jsjwjdwjdwjdwin" for="one-b">
-          <span class="alphabet">B</span> {{form.op2}}
-        </label>
-        <input type="radio" class="input-radio one-c jshdgdgwgdwfdfwdwjfdjwwdwdin" id="one-c" name="{{form.op1}}">
-        <label class="radio-label jsjwjdwjdwjdwin" for="one-c">
-          <span class="alphabet">C</span>{{form.op3}}
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary" type="submit" onclick="respuesta();">Enviar</button>
-      <a class="text-muted text-decoration-none text-blue" href="{% url 'index2' %}"> | salir </a>
-    </form>
-  </main>
-</section>
-<script>
-
-
-  function respuesta(e) {
-    const preg1 = document.getElementById("one-a").value;
-    const preg2 = document.getElementById("one-b").value;
-    const preg3 = document.getElementById("one-c").value;
-    const input = document.getElementById("opcionMarcada");
-
-    if (preg1 === "on") {
-      input.value = "op1";
-    }
-    else if (preg2 === "on") {
-      input.value = "op2";
-
-    }
-    else {
-
-      input.value = "op3";
-    }
-
-  }
-</script>
-{% endblock %}
