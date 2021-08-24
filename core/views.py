@@ -12,6 +12,10 @@ def inicio(request):
   contexto = {}
   return render(request, template, contexto)
 
+@login_required
+def compartir(request):
+  return render(request, "share.html")
+
 def index2(request):
   # if request.user.is_authenticated: #and request.user.is_staff:
   #   template = "admin_dashboard.html"
