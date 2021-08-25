@@ -2,20 +2,12 @@
 
 {% block contenido %}
 
+<h1 class="py-1 text-center">Ranking</h1>
 <div class="py-5 text-center container">
   {% if request.user.is_authenticated %}
-  <p>usuario: {{request.user.username }}</p>
-  {% if request.user.is_staff %}
-  <div class="d-grid gap-2 col-6 mx-auto">
-    <a class="btn btn-lg btn-outline-primary" href="/admin/core/quesmodel/add">Agregar Preguntas</a>
-    <a class="btn btn-lg btn-outline-success" href="/admin/users/perfil/">Administrar Usuarios</a>
-  </div>
-  {% else %}
-  <p>puntaje: {{request.user.puntaje }}</p>
-  <div class="d-grid gap-2 col-6 mx-auto">
-    <a class="btn btn-lg btn-outline-primary" href="{% url 'jugar' %}">Jugar</a>
-  </div>
-  {% endif %}
+  {% for user in form %}
+  <p># {{ forloop.counter }}: {{ user.username }} | {{ user.puntaje }}</p>
+  {% endfor %}
   {% else %}
   <div class="d-grid gap-2 col-6 mx-auto">
     <a class="btn btn-lg btn-outline-primary" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>

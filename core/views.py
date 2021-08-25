@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import *
+from users import models
 import random
 
 
@@ -15,6 +16,18 @@ def inicio(request):
 @login_required
 def compartir(request):
   return render(request, "share.html")
+
+@login_required
+def ranking(request):
+  form = models.Perfil.objects.filter(is_staff=False).order_by('-puntaje').values('username', 'puntaje')[:10]
+  context = {
+    'form': form
+  }
+  return render(request, "ranking.html", context)
+
+@login_required
+def resultado(request):
+  return render(request, "resultado.html")
 
 def index2(request):
   # if request.user.is_authenticated: #and request.user.is_staff:
@@ -90,9 +103,18 @@ def jugar(request):
       else:
         wrong = int(request.POST.get("wrong"))+1
         print('incorrectas:', wrong, 'Nro Pregunta:', numeroPregunta)
-      # return render(request,'index2.html')
-      #cambiar y poner que mande a la pagina de los resultados
-      return redirect("index2")  # la de resultado todavia no tenemos
+      
+      user = request.user
+      if user.puntaje < score:
+        user.puntaje = score
+      user.save()
+      context = {
+        'score': score,
+        'correct': correct,
+        'wrong': wrong,
+        "numeroPregunta": numeroPregunta
+      }
+      return render(request,'resultado.html',context)
 
 
 

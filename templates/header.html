@@ -11,12 +11,13 @@
         <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
           {% if request.user.is_authenticated %}
           {% if request.user.is_staff %}
-          <li><a class="nav-link text-white" href="/admin/core/quesmodel/add">Agregar Preguntas</a></li>
+          <li><a class="nav-link text-white" href="/admin/core/quesmodel/add">agregar preguntas</a></li>
+          <li><a class="nav-link text-white" href="/admin/users/perfil/">usuarios</a></li>
           {% else %}
           <li class="nav-link text-white">puntaje: {{request.user.puntaje }}</li>
-          <li><a class="nav-link text-white" href="#">ranking</a></li>
+          <li><a class="nav-link text-white" href="{% url 'ranking' %}">ranking</a></li>
           {% endif %}
-          <li><a class="nav-link text-white" href="{% url 'inicio' %}"> 🇦🇷 </a></li>
+          <li><a class="nav-link text-white" href="{% url 'editar_usuario' %}">editar perfil</a></li>
           <li><a class="nav-link text-white" href="{% url 'cerrar_sesion' %}">salir</a></li>
           {% else %}
           <li><a class="nav-link text-white" href="{% url 'iniciar_sesion' %}">ingresar</a></li>
