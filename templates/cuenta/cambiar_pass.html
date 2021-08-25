@@ -2,7 +2,7 @@
 
 {% block contenido %}
 
-<form class="mt-2 form-signin text-center" method="POST">
+<form class="mt-2 form-signin text-center" method="POST" autocomplete="off">
   {% csrf_token %}
 
   {% load static %}
@@ -10,22 +10,17 @@
   <h1 class="h3 mb-3 fw-normal">Cambiar Contraseña</h1>
 
   <div class="mb-3 mt-3">
-    <div>
-      {{ form.old_password.label_tag }}
+    {% for field in form %}
+    <label for="{{field.id_for_label}}">
+      {{field.label}}
+    </label>
+    <div class="col s12">
+      {{field}}
     </div>
-    {{ form.old_password }}
-  </div>
-  <div class="mb-3 mt-3">
-    <div>
-      {{ form.new_password1.label_tag }}
+    <div class="text-center text-danger">
+      {{field.errors}}
     </div>
-    {{ form.new_password1 }}
-  </div>
-  <div class="mb-3 mt-3">
-    <div>
-      {{ form.new_password2.label_tag }}
-    </div>
-    {{ form.new_password2 }}
+    {% endfor %}
   </div>
 
   {% if form.errors %}
@@ -41,5 +36,12 @@
   <button class="btn btn-lg btn-primary" type="submit">Aceptar</button>
   <a class="text-muted text-decoration-none text-blue" href="{% url 'inicio' %}">cancelar</a>
 </form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const $passwd = document.querySelector("div > input");
+    $passwd.value = null;
+  });
+</script>
 
 {% endblock %}

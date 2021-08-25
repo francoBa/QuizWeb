@@ -84,17 +84,17 @@ def cerrar_sesion(request):
 
 
 
-@login_required
-def pass_cambiada(request):
-  form = CambiarPassword(request.user)
+# @login_required
+# def pass_cambiada(request):
+#   form = CambiarPassword(request.user)
 
-  if request.method == 'POST':
-    form = CambiarPassword(request.user, request.POST)
-    if form.is_valid():
-      form.old_password = request.user.password
-      request.user.set_password(form.cleaned_data["new_password1"])
-      request.user.save()
-      update_session_auth_hash(request, request.user)
+#   if request.method == 'POST':
+#     form = CambiarPassword(request.user, request.POST)
+#     if form.is_valid():
+#       form.old_password = request.user.password
+#       request.user.set_password(form.cleaned_data["new_password1"])
+#       request.user.save()
+#       update_session_auth_hash(request, request.user)
 
-  contexto = {"form": form}
-  return render(request, "cuenta/cambiar_pass.html", contexto)
+#   contexto = {"form": form}
+#   return render(request, "cuenta/cambiar_pass.html", contexto)
