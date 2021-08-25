@@ -66,7 +66,7 @@ section {
     font-weight: bolder;
 }
 
-label {
+.radio-label {
     display: flex;
     align-items: center;
     border-radius: 5px;
@@ -78,12 +78,12 @@ label {
     color: #000;
 }
 
-label:hover .alphabet {
+.radio-label:hover .alphabet {
     background: #000;
     color: #fff;
 }
 
-label .alphabet {
+.alphabet {
     border-radius: 5px;
     border: solid 1px #000;
     padding: .4rem .5rem .4rem;
@@ -94,7 +94,7 @@ label .alphabet {
     color: #000;
 }
 
-label .icon {
+.icon {
     height: auto;
     position: absolute;
     left: 92%;

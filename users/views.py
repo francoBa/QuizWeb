@@ -91,11 +91,10 @@ def pass_cambiada(request):
   if request.method == 'POST':
     form = CambiarPassword(request.user, request.POST)
     if form.is_valid():
-      user = Perfil.objects.get(username=form.user.cleaned_data["username"])
-      password = form.cleaned_data["new_password1"]
-      form.user.set_password(password)
-      form.save()
-      update_session_auth_hash(request, user)
+      form.old_password = request.user.password
+      request.user.set_password(form.cleaned_data["new_password1"])
+      request.user.save()
+      update_session_auth_hash(request, request.user)
 
   contexto = {"form": form}
   return render(request, "cuenta/cambiar_pass.html", contexto)
