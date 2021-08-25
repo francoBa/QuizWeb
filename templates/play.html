@@ -3,7 +3,7 @@
 {% block contenido %}
 
 <h1 class="py-1 text-center">Jugar</h1>
-<div align="right " id="displaytimer"><b>Timer: 0 seconds</b></div>
+<div align="right "><span id="displaytimer" class="h1 text-danger">10</span></div>
 <section class="section-1" id="section-1">
   <div class="text-container">
     <h3>{{form.category}}</h3>
@@ -21,6 +21,7 @@
     <input type="hidden" name="score" value="{{score}}">
     <input type="hidden" name="wrong" value="{{wrong}}">
     <input type="hidden" name="correct" value="{{correct}}">
+    <input type='hidden' name="timer" id="timer" value="">
     <div class="quiz-options">
       <label class="radio-label jsjwjdwjdwjdwco" for="one-a">
         <input type="radio" class="input-radio one-a jshdgdgwgdwfdfwdwjfdjwwdwdco" id="one-a" name="{{form.op1}}">
@@ -35,27 +36,46 @@
         <span class="alphabet">C</span>{{form.op3}}
       </label>
     </div>
-    <button class="btn btn-lg btn-primary" type="submit" onclick="respuesta();">Enviar</button>
+    <button class="btn btn-lg btn-primary" type="submit" id="enviar-respuesta">Enviar</button>
     <a class="text-muted text-decoration-none text-blue" href="{% url 'index2' %}"> | salir </a>
   </form>
 </section>
 <script>
-  function respuesta(e) {
-    const preg1 = document.getElementById("one-a").value;
-    const preg2 = document.getElementById("one-b").value;
-    const preg3 = document.getElementById("one-c").value;
-    const input = document.getElementById("opcionMarcada");
+  document.addEventListener('DOMContentLoaded', () => {
+    function respuesta(e) {
+      const $preg1 = document.getElementById("one-a").value,
+            $preg2 = document.getElementById("one-b").value,
+            $preg3 = document.getElementById("one-c").value,
+            $input = document.getElementById("opcionMarcada");
 
-    if (preg1 === "on") {
-      input.value = "op1";
-    }
-    else if (preg2 === "on") {
-      input.value = "op2";
-    }
-    else {
-      input.value = "op3";
-    }
+      if ($preg1 === "on") {
+        $input.value = "op1";
+      }
+      else if ($preg2 === "on") {
+        $input.value = "op2";
+      }
+      else {
+        $input.value = "op3"; // opción por defecto
+      };
+    };
 
-  }
+    document.getElementById("enviar-respuesta").addEventListener("click", respuesta)
+
+    const $timer = document.getElementById('displaytimer'),
+          $inputtag = document.getElementById('timer');
+    let t=10
+    let intervalo = setInterval( () => {
+      t-=1
+      // $timer.innerHTML ="<b>Timer: " +t+" seconds</b>"
+      $timer.textContent = t
+      $inputtag.value = t
+      if (t == 0) {
+        clearInterval(intervalo);
+        // window.location = '/';
+        respuesta();
+        document.getElementById("enviar-respuesta").click();
+      };
+    }, 1000)
+  });
 </script>
 {% endblock %}

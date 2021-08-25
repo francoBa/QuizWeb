@@ -105,7 +105,7 @@ def jugar(request):
         print('incorrectas:', wrong, 'Nro Pregunta:', numeroPregunta)
       
       user = request.user
-      if user.puntaje < score:
+      if user.puntaje is None or user.puntaje < score:
         user.puntaje = score
       user.save()
       context = {

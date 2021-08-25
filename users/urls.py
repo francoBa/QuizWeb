@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, reverse_lazy
 from . import views
 from django.contrib.auth import views as auth_user_views
 
@@ -45,11 +45,21 @@ urlpatterns = [
 
   #cambiar contraseña
   path(
-      "cambiar_pass/",
+    "cambiar_pass/",
     auth_user_views.PasswordChangeView.as_view(
-      template_name="cuenta/cambiar_pass.html"
+      template_name="cuenta/cambiar_pass.html",
+      success_url=reverse_lazy("inicio")
     ),
     name="change_password"
-  ),
-  path("cambiado/", views.pass_cambiada, name="password_change_done")
+  )
+
+  #cambiar contraseña
+  # path(
+  #     "cambiar_pass/",
+  #   auth_user_views.PasswordChangeView.as_view(
+  #     template_name="cuenta/cambiar_pass.html"
+  #   ),
+  #   name="change_password"
+  # ),
+  # path("cambiado/", views.pass_cambiada, name="password_change_done")
 ]

@@ -12,7 +12,7 @@
     <div>
       {{ form.first_name.label_tag }}
     </div>
-    {{form.first_name}}
+    <label for="{{form.first_name.id_for_label}}" id="nombre">{{ form.first_name }}</label>
   </div>
   <div class="mb-3 mt-3">
     <div>
@@ -45,7 +45,6 @@
     {{form.password2}}
   </div>
 
-
   {% if form.errors %}
   {% for field in form %}
   {% for error in field.errors %}
@@ -59,5 +58,12 @@
   <button class="btn btn-lg btn-primary" type="submit">Crear</button>
   <a class="text-muted text-decoration-none text-blue" href="{% url 'iniciar_sesion' %}">iniciar sesión</a>
 </form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const $nombre = document.getElementById('nombre');
+    $nombre.focus();
+  });
+</script>
 
 {% endblock %}
