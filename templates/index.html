@@ -2,24 +2,33 @@
 
 {% block contenido %}
 
-<div class="py-5 text-center container">
+<section class="container">
+  <div class="plaza">
+    <h2>Plaza central</h2>
+  </div>
+  <div class="domo">
+    <h2>Domo del Centenario</h2>
+  </div>
+  <div class="escultura">
+    <h2>Escultura</h2>
+  </div>
   {% if request.user.is_authenticated %}
   <p>usuario: {{request.user.username }}</p>
   {% if request.user.is_staff %}
-  <div class="d-grid gap-2 col-6 mx-auto">
-    <a class="btn btn-lg btn-outline-primary" href="/admin/core/quesmodel/add">Agregar Preguntas</a>
-    <a class="btn btn-lg btn-outline-success" href="/admin/users/perfil/">Administrar Usuarios</a>
+  <div class="container">
+    <a class="jugar" href="/admin/core/quesmodel/add">Agregar Preguntas</a>
+    <a class="jugar" href="/admin/users/perfil/">Administrar Usuarios</a>
   </div>
   {% else %}
   <p>puntaje: {{request.user.puntaje }}</p>
-  <div class="d-grid gap-2 col-6 mx-auto">
-    <a class="btn btn-lg btn-outline-primary" href="{% url 'jugar' %}">Jugar</a>
+  <div class="container">
+    <a class="jugar" href="{% url 'jugar' %}">JUGAR</a>
   </div>
   {% endif %}
   {% else %}
-  <div class="d-grid gap-2 col-6 mx-auto">
-    <a class="btn btn-lg btn-outline-primary" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
-    <a class="btn btn-lg btn-outline-success" href="{% url 'crear_usuario' %}">Registrarse</a>
+  <div class="container">
+    <a class="jugar" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
+    <a class="jugar" href="{% url 'crear_usuario' %}">Registrarse</a>
   </div>
   {% endif %}
 
@@ -30,6 +39,6 @@
     {% endfor %}
   </ul>
   {% endif %}
-</div>
+</section>
 
 {% endblock %}

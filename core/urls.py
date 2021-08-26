@@ -7,6 +7,5 @@ urlpatterns = [
   path("compartir/", views.compartir, name="compartir"),
   path("jugar/", views.jugar, name="jugar"),
   path("ranking/", views.ranking, name="ranking"),
-  path("resultado/", views.resultado, name="resultado"),
-  path("index2/", views.index2, name="index2"),
+  path("resultado/", views.resultado, name="resultado")
 ]
