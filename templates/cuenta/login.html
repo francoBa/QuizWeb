@@ -9,13 +9,13 @@
     <label>
       {{ form.username.label_tag }}
     </label>
-    <p class="form-input">{{form.username}}</p>
+    {{form.username}}
   </div>
   <div>
     <label>
       {{ form.password.label_tag }}
     </label>
-    <p class="form-input">{{form.password}}</p>
+    {{form.password}}
   </div>
 
   {% if form.errors %}
