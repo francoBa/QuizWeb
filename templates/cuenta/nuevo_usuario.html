@@ -10,37 +10,37 @@
     <label for="{{form.first_name.id_for_label}}" id="nombre">
       {{ form.first_name.label_tag }}
     </label>
-    <p class="form-input">{{ form.first_name }}</p>
+    {{ form.first_name }}
   </div>
   <div>
     <label for="{{form.last_name.id_for_label}}">
       {{ form.last_name.label_tag }}
     </label>
-    <p class="form-input">{{ form.last_name }}</p>
+    {{ form.last_name }}
   </div>
   <div>
     <label for="{{form.email.id_for_label}}">
       {{ form.email.label_tag }}
     </label>
-    <p class="form-input">{{ form.email }}</p>
+    {{ form.email }}
   </div>
   <div>
     <label for="{{form.username.id_for_label}}">
       {{ form.username.label_tag }}
     </label>
-    <p class="form-input">{{ form.username }}</p>
+    {{ form.username }}
   </div>
   <div>
     <label for="{{form.password1.id_for_label}}">
       {{ form.password1.label_tag }}
     </label>
-    <p class="form-input">{{ form.password1 }}</p>
+    {{ form.password1 }}
   </div>
   <div>
     <label for="{{form.password2.id_for_label}}">
       {{ form.password2.label_tag }}
     </label>
-    <p class="form-input">{{ form.password2 }}</p>
+    {{ form.password2 }}
   </div>
 
   {% if form.errors %}
