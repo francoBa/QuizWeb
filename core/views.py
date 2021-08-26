@@ -6,9 +6,6 @@ import random
 
 
 def inicio(request):
-  # if request.user.is_authenticated: #and request.user.is_staff:
-  #   template = "admin_dashboard.html"
-  # else:
   template = "index.html"
   contexto = {}
   return render(request, template, contexto)
@@ -16,6 +13,7 @@ def inicio(request):
 @login_required
 def compartir(request):
   return render(request, "share.html")
+
 
 @login_required
 def ranking(request):
@@ -25,28 +23,23 @@ def ranking(request):
   }
   return render(request, "ranking.html", context)
 
+
 @login_required
 def resultado(request):
-  return render(request, "resultado.html")
-
-def index2(request):
-  # if request.user.is_authenticated: #and request.user.is_staff:
-  #   template = "admin_dashboard.html"
-  # else:
-  template = "index2.html"
-  contexto = {}
-  return render(request, template, contexto)
-
+  if request.method != "POST":
+    return redirect('inicio')
+  else:
+    return render(request, "resultado.html")
 
 @login_required
 def jugar(request):
   '''
-    crear contador de preguntas
-    crear acumulador de puntaje
-    Elegir pregunta al azar
-    obtener respuestas y desplegar en pantalla categoría y respuestas
-    validar correcta en valor de respuesta
-    acumular puntaje
+    crea contador de preguntas
+    crea acumulador de puntaje
+    pregunta al azar
+    obtiene pregunta y despliega en pantalla categoría y opciones
+    valida opción correcta
+    acumula puntaje
   '''
   
   if request.POST.get("numeroPregunta"):
@@ -76,14 +69,15 @@ def jugar(request):
       questions = QuesModel.objects.get(pk=int(request.POST.get("ID")))
       opcionSeleccionada=request.POST.get("opcionMarcada")
       if request.POST.get(opcionSeleccionada) == questions.ans:
-        score= int(request.POST.get("score"))+10
-        correct=int(request.POST.get("correct"))+1
+        score = int(request.POST.get("score")) + 10
+        score = int(request.POST.get("timer")) * score
+        correct = int(request.POST.get("correct")) + 1
         print('puntaje:', score, 'corectas:', correct, 'Nro Pregunta:', numeroPregunta)
       else:
-        wrong=int(request.POST.get("wrong"))+1
+        wrong = int(request.POST.get("wrong")) + 1
         print('incorrectas:', wrong, 'Nro Pregunta:', numeroPregunta)
-      numeroPregunta+=1 # próxima pregunta
-      electorDeCategoria= random.choice(range(26))
+      numeroPregunta += 1 # próxima pregunta
+      electorDeCategoria = random.choice(range(26))
       questions = QuesModel.objects.get(pk=electorDeCategoria)
       context = {
         'score':score,
@@ -97,11 +91,12 @@ def jugar(request):
       questions = QuesModel.objects.get(pk=int(request.POST.get("ID")))
       opcionSeleccionada = request.POST.get("opcionMarcada")
       if request.POST.get(opcionSeleccionada) == questions.ans:
-        score = int(request.POST.get("score"))+10
-        correct = int(request.POST.get("correct"))+1
+        score = int(request.POST.get("score")) + 10
+        score = int(request.POST.get("timer")) * score
+        correct = int(request.POST.get("correct")) + 1
         print('puntaje:', score, 'corectas:', correct, 'Nro Pregunta:', numeroPregunta)
       else:
-        wrong = int(request.POST.get("wrong"))+1
+        wrong = int(request.POST.get("wrong")) + 1
         print('incorrectas:', wrong, 'Nro Pregunta:', numeroPregunta)
       
       user = request.user
@@ -115,18 +110,3 @@ def jugar(request):
         "numeroPregunta": numeroPregunta
       }
       return render(request,'resultado.html',context)
-
-
-
-
-
-
-
-
- 
-    
-  
-  
-
-  
-  

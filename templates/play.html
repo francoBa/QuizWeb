@@ -2,7 +2,7 @@
 
 {% block contenido %}
 
-<h1 class="py-1 text-center">Jugar</h1>
+<h2 class="py-1 text-center">Jugar</h2>
 <div align="right "><span id="displaytimer" class="h1 text-danger">10</span></div>
 <section class="section-1" id="section-1">
   <div class="text-container">
@@ -36,17 +36,17 @@
         <span class="alphabet">C</span>{{form.op3}}
       </label>
     </div>
-    <button class="btn btn-lg btn-primary" type="submit" id="enviar-respuesta">Enviar</button>
-    <a class="text-muted text-decoration-none text-blue" href="{% url 'index2' %}"> | salir </a>
+    <button class="boton" type="submit" id="enviar-respuesta">Enviar</button>
+    <a href="{% url 'inicio' %}"> | salir </a>
   </form>
 </section>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     function respuesta(e) {
       const $preg1 = document.getElementById("one-a").value,
-            $preg2 = document.getElementById("one-b").value,
-            $preg3 = document.getElementById("one-c").value,
-            $input = document.getElementById("opcionMarcada");
+        $preg2 = document.getElementById("one-b").value,
+        $preg3 = document.getElementById("one-c").value,
+        $input = document.getElementById("opcionMarcada");
 
       if ($preg1 === "on") {
         $input.value = "op1";
@@ -62,16 +62,14 @@
     document.getElementById("enviar-respuesta").addEventListener("click", respuesta)
 
     const $timer = document.getElementById('displaytimer'),
-          $inputtag = document.getElementById('timer');
-    let t=10
-    let intervalo = setInterval( () => {
-      t-=1
-      // $timer.innerHTML ="<b>Timer: " +t+" seconds</b>"
+      $inputtag = document.getElementById('timer');
+    let t = 10
+    let intervalo = setInterval(() => {
+      t -= 1
       $timer.textContent = t
       $inputtag.value = t
       if (t == 0) {
         clearInterval(intervalo);
-        // window.location = '/';
         respuesta();
         document.getElementById("enviar-respuesta").click();
       };
