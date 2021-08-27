@@ -69,8 +69,8 @@ def jugar(request):
       questions = QuesModel.objects.get(pk=int(request.POST.get("ID")))
       opcionSeleccionada=request.POST.get("opcionMarcada")
       if request.POST.get(opcionSeleccionada) == questions.ans:
-        score = int(request.POST.get("score")) + 10
-        score = int(request.POST.get("timer")) * score
+        score = int(request.POST.get("score"))
+        score += int(request.POST.get("timer")) * 10
         correct = int(request.POST.get("correct")) + 1
         print('puntaje:', score, 'corectas:', correct, 'Nro Pregunta:', numeroPregunta)
       else:
