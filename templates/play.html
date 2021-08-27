@@ -12,15 +12,16 @@
   </div>
   <form class="mt-2 form-signin text-center" method="POST" action="">
     {% csrf_token %}
-    <input type="hidden" name="numeroPregunta" value="{{numeroPregunta}}">
+    <input type="hidden" name="numeroPregunta" value="{{ numeroPregunta }}">
     <input type="hidden" id="opcionMarcada" name="opcionMarcada" value="">
-    <input type="hidden" name="op1" value="{{form.op1}}">
-    <input type="hidden" name="op2" value="{{form.op2}}">
-    <input type="hidden" name="op3" value="{{form.op3}}">
-    <input type="hidden" name="ID" value="{{form.id}}">
-    <input type="hidden" name="score" value="{{score}}">
-    <input type="hidden" name="wrong" value="{{wrong}}">
-    <input type="hidden" name="correct" value="{{correct}}">
+    <input type="hidden" name="op1" value="{{ form.op1 }}">
+    <input type="hidden" name="op2" value="{{ form.op2 }}">
+    <input type="hidden" name="op3" value="{{ form.op3 }}">
+    <input type="hidden" name="ID" value="{{ form.id }}">
+    <input type="hidden" name="ids" value="{{ ids }}">
+    <input type="hidden" name="score" value="{{ score }}">
+    <input type="hidden" name="wrong" value="{{ wrong }}">
+    <input type="hidden" name="correct" value="{{ correct }}">
     <input type='hidden' name="timer" id="timer" value="">
     <div class="quiz-options">
       <label class="radio-label jsjwjdwjdwjdwco" for="one-a">
@@ -47,6 +48,10 @@
         $preg2 = document.getElementById("one-b").value,
         $preg3 = document.getElementById("one-c").value,
         $input = document.getElementById("opcionMarcada");
+
+      if ($preg1 !== 'on' && $preg2 !== 'on' && $preg3 !== 'on') {
+        document.getElementById('timer').value = 0;
+      };
 
       if ($preg1 === "on") {
         $input.value = "op1";
