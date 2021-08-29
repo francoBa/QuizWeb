@@ -1,69 +1,61 @@
-<!DOCTYPE html>
-<html lang="es-AR">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bienvenidos - Juego de Preguntas y Respuestas</title>
-  <meta name="description"
-    content="Proyecto Python + Django + SQLite3 - Informatorio 2021 - Juego de Preguntas y Respuestas">
-  <meta name="author" content="Comisión 6 - Grupo 7 - Trabajo Final (Informatorio 2021)">
+{% block contenido %}
+<section>
+  <h1>BIENVENIDOS A JUGAR</h1>
+  <div class="somos-descripcion">
+    
+      <div class="somos">
+        <h2>INTEGRANTES</h2>
+        <ul>
+          <li>Franco Barreto</li>
+          <li>Estela Rios</li>
+          <li>Grego apellido</li>
+          <li>Mati Apellido</li>
+          <li>Angel Fernández</li>
+        </ul>
+      </div>
+      <div class="descripcion">
+        <h2>¿Quiénes somos?</h2>
+        <p>Somos un grupo de estudiantes que emprendieron camino en el maravilloso mundo de la programación.
+          Los queremos invitar a <span class="span">JUGAR</span> en nuestra aplicación de preguntas y respuestas. Adelante
+        </p>
+      </div>
+  </div>
 
-  {% load static %}
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hamburgers/1.1.3/hamburgers.min.css">
-  <link rel="stylesheet" href="{% static 'css/reset.css' %}">
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
-</head>
+</section>
 
-<body data-dark></body>
-<header class="header">
-  <h1>Bienvenidos!!</h1>
-</header>
 
-<button class="panel-btn hamburger hamburger--vortex" type="button">
-  <span class="hamburger-box">
-    <span class="hamburger-inner"></span>
-  </span>
-</button>
+<section class="container">
+  
+  {% if request.user.is_authenticated %}
+  <p>usuario: {{request.user.username }}</p>
+  {% if request.user.is_staff %}
+  <div class="container">
+    <a class="jugar" href="/admin/core/quesmodel/add">Agregar Preguntas</a>
+    <a class="jugar" href="/admin/users/perfil/">Administrar Usuarios</a>
+  </div>
+  {% else %}
+  
+  <p>puntaje: {{request.user.puntaje }}</p>
+  <div class="container">
+    <a class="jugar" href="{% url 'jugar' %}">JUGAR</a>
+  </div>
+  {% endif %}
+  {% else %}
+  <div class="container">
+    <a class="jugar" href="{% url 'iniciar_sesion' %}">Iniciar Sesión</a>
+    <a class="jugar" href="{% url 'crear_usuario' %}">Registrarse</a>
+  </div>
+  {% endif %}
 
-<aside class="panel">
-  <nav class="menu">
-    {% if request.user.is_authenticated %}
-    <p style="color: white;">usuario: {{request.user.username }}</p>
-    {% if request.user.is_staff %}
-    <a href="/admin/core/quesmodel/add">Agregar Preguntas</a>
-    {% else %}
-    <p style="color: white;">puntaje: {{request.user.puntaje }}</p>
-    {% endif %}
-    <a href="{% url 'cerrar_sesion' %}">Cerrar sesion</a>
-    {% else %}
-    <a href="{% url 'iniciar_sesion' %}">Iniciar sesion</a>
-    <a href="{% url 'crear_usuario' %}">registrarse</a>
-    {% endif %}
-  </nav>
-</aside>
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</section>
 
-<main class="main">
-  <!-- <section class="intro"></section> -->
-  <section class="section">
-    {% if request.user.is_authenticated %}
-    {% if not request.user.is_staff %}
-    <a href="{% url 'jugar' %}">Jugar</a>
-    {% endif %}
-    {% endif %}
-  </section>
-</main>
-
-<button class="scroll-top-btn hidden">&#11014;</button>
-<button class="dark-theme-btn">🌙</button>
-
-<footer class="footer">
-  <address class="info">
-    Informatorio 2021 - Comisión 6 - Grupo 7
-  </address>
-</footer>
-
-<script src="{% static 'js/index.js' %}"></script>
-</body>
-
-</html>
+{% endblock %}

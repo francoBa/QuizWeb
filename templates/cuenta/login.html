@@ -1,20 +1,30 @@
-<!DOCTYPE html>
-<html lang="es-AR">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iniciar sesion</title>
-</head>
+{% block contenido %}
 
-<body>
-  <h1>Iniciar Sesion</h1>
-  <form method="POST">
-    {% csrf_token %}
-    {{ form }}
-    <input type="hidden" name="next" value="{{next}}">
-    <input type="submit" value="Iniciar">
-  </form>
-</body>
+<form class="form-registrar" method="POST">
+  {% csrf_token %}
+  <h2>Iniciar Sesión</h2>
+  <div>
+    <label>
+      {{ form.username.label_tag }}
+    </label>
+    {{form.username}}
+  </div>
+  <div>
+    <label>
+      {{ form.password.label_tag }}
+    </label>
+    {{form.password}}
+  </div>
 
-</html>
+  {% if form.errors %}
+  <div class="text-center text-alert">
+    Usuario o Contraseña Incorrectos
+  </div>
+  {% endif %}
+  <button class="boton" type="submit">Iniciar Sesión</button>
+  <p class="p"><a href="{% url 'crear_usuario' %}">¿No tienes una cuenta?</a></p>
+</form>
+
+{% endblock %}

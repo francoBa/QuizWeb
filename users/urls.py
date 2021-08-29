@@ -6,9 +6,7 @@ urlpatterns = [
   #login
   path(
     "iniciar_sesion/",
-    auth_user_views.LoginView.as_view(
-      template_name="cuenta/login.html",
-    ),
+    views.iniciar_sesion,
     name="iniciar_sesion"
   ),
 
@@ -35,11 +33,8 @@ urlpatterns = [
 
   #cambiar contraseña
   path(
-    "password/",
-    auth_user_views.PasswordChangeView.as_view(
-      template_name="cuenta/cambiar_pass.html"
-    ),
+    "cambiar_pass/",
+    views.pass_cambiada,
     name="change_password"
-  ),
-  path("cambiado/", views.pass_cambiada, name="password_change_done")
+  )
 ]

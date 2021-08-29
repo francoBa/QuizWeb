@@ -4,8 +4,7 @@
 
 <form class="form-registrar" method="POST">
   {% csrf_token %}
-  <h2>Formulario de Registro</h2>
-  <input type="hidden" id="respuestaC" value="{{form.ans}}">
+  <h2>Formulario de Edición</h2>
   <div>
     <label for="{{form.first_name.id_for_label}}" id="nombre">
       {{ form.first_name.label_tag }}
@@ -30,18 +29,6 @@
     </label>
     {{ form.username }}
   </div>
-  <div>
-    <label for="{{form.password1.id_for_label}}">
-      {{ form.password1.label_tag }}
-    </label>
-    {{ form.password1 }}
-  </div>
-  <div>
-    <label for="{{form.password2.id_for_label}}">
-      {{ form.password2.label_tag }}
-    </label>
-    {{ form.password2 }}
-  </div>
 
   {% if form.errors %}
   {% for field in form %}
@@ -53,15 +40,12 @@
   {% endfor %}
   {% endif %}
 
-  <button class="boton" type="submit">Registrarme</button>
-  <a href="{% url 'iniciar_sesion' %}">¿Ya tiene cuenta?</a>
+  <button class="boton" type="submit">Confirmar</button>
+  <div class="mb-3 mt-3">
+    <a href="{% url 'change_password' %}">cambiar contraseña</a>
+    <span> | </span>
+    <a href="{% url 'inicio' %}">cancelar</a>
+  </div>
 </form>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const $nombre = document.getElementById('nombre');
-    $nombre.focus();
-  });
-</script>
 
 {% endblock %}
