@@ -1,17 +1,33 @@
 {% extends 'base.html' %}
 
 {% block contenido %}
+<section>
+  <h1>BIENVENIDOS A JUGAR</h1>
+  <div class="somos-descripcion">
+    
+      <div class="somos">
+        <h2>INTEGRANTES</h2>
+        <ul>
+          <li>Franco Barreto</li>
+          <li>Estela Rios</li>
+          <li>Grego apellido</li>
+          <li>Mati Apellido</li>
+          <li>Angel Fernández</li>
+        </ul>
+      </div>
+      <div class="descripcion">
+        <h2>¿Quiénes somos?</h2>
+        <p>Somos un grupo de estudiantes que emprendieron camino en el maravilloso mundo de la programación.
+          Los queremos invitar a <span class="span">JUGAR</span> en nuestra aplicación de preguntas y respuestas. Adelante
+        </p>
+      </div>
+  </div>
+
+</section>
+
 
 <section class="container">
-  <div class="plaza">
-    <h2>Plaza central</h2>
-  </div>
-  <div class="domo">
-    <h2>Domo del Centenario</h2>
-  </div>
-  <div class="escultura">
-    <h2>Escultura</h2>
-  </div>
+  
   {% if request.user.is_authenticated %}
   <p>usuario: {{request.user.username }}</p>
   {% if request.user.is_staff %}
@@ -20,6 +36,7 @@
     <a class="jugar" href="/admin/users/perfil/">Administrar Usuarios</a>
   </div>
   {% else %}
+  
   <p>puntaje: {{request.user.puntaje }}</p>
   <div class="container">
     <a class="jugar" href="{% url 'jugar' %}">JUGAR</a>
